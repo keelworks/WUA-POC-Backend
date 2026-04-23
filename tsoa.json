@@ -1,0 +1,15 @@
+{
+    "entryPoint": "src/app.ts",
+    "routes": {
+        "routesDir": "src/routes",
+        "middleware": "express"
+    },
+    "swagger": {
+        "outputDirectory": "public",
+        "entryPoint": "src/app.ts",
+        "basePath": "/",
+        "securityDefinitions": {}
+    },
+    "controllerPathGlobs": ["src/controllers/**/*.ts"],
+    "noImplicitAdditionalProperties": "throw-on-extras"
+}
