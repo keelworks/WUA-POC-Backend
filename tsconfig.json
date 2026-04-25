@@ -10,10 +10,9 @@
     "module": "nodenext",
     "target": "esnext",
     "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
 
     // Other Outputs
     "sourceMap": true,
@@ -40,7 +39,17 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    
+    "paths": {
+      "@controllers/*": ["./src/controllers/*"],
+      "@services/*": ["./src/services/*"],
+      "@repositories/*": ["./src/repositories/*"],
+      "@schemas/*": ["./src/schemas/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@config/*": ["./src/config/*"]
+    },
 
+    // Swagger/tsoa
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
   },

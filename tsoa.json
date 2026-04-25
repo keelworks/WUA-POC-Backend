@@ -1,15 +1,23 @@
 {
-    "entryPoint": "src/app.ts",
-    "routes": {
-        "routesDir": "src/routes",
-        "middleware": "express"
-    },
-    "swagger": {
-        "outputDirectory": "public",
-        "entryPoint": "src/app.ts",
-        "basePath": "/",
-        "securityDefinitions": {}
-    },
-    "controllerPathGlobs": ["src/controllers/**/*.ts"],
+  "entryPoint": "src/app.ts",
+  "routes": {
+    "routesDir": "src/routes",
+    "middleware": "express",
+    "basePath": "/api",
     "noImplicitAdditionalProperties": "throw-on-extras"
+  },
+  "swagger": {
+    "outputDirectory": "public",
+    "entryPoint": "src/app.ts",
+    "basePath": "/api",
+    "specVersion": 3,
+    "securityDefinitions": {},
+    "noImplicitAdditionalProperties": "throw-on-extras"
+  },
+  "controllerPathGlobs": ["src/controllers/**/*.ts"],
+  "spec": {
+    "outputDirectory": "public",
+    "specVersion": 3,
+    "securityDefinitions": {}
+  }
 }
