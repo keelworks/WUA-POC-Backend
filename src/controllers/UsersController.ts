@@ -1,11 +1,35 @@
-import { Controller, Get, Route, Tags } from "tsoa";
+import { Controller, Get, Post, Body, Route, SuccessResponse, Tags } from "tsoa";
+
+import prisma from "@config/database.js";
+import { Param } from "@prisma/client/runtime/client";
 
 @Route("users")     // base URL: /users
 @Tags("Users")      // grouping for Swagger
 export class UsersController extends Controller {
-    @Get("/")
-    public async getTest(): Promise<{message: string}> {
-        return { message: "ok" };
+    @Post()
+    @SuccessResponse("201", "Created")
+    public async createUser(@Body() requestBody: { email: string; name?: string }): Promise<void> {
+        await prisma.user.create({
+            data: {
+                email: requestBody.email,
+                name: requestBody.name,
+            },
+        });
+        this.setStatus(201);
+    }
+
+    // TODO
+    public async getUser(): Promise<void> {
+
+    }
+
+    // TODO
+    public async updateUser(@Body() requestBody: { email: string; name?: string }): Promise<void> {
+
+    }
+
+    // TODO
+    public async deleteUser(): Promise<void> {
+
     }
 }
-

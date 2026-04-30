@@ -29,29 +29,30 @@ export function RegisterRoutes(app: Router) {
 
 
     
-        const argsUsersController_getTest: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsUsersController_createUser: Record<string, TsoaRoute.ParameterSchema> = {
+                requestBody: {"in":"body","name":"requestBody","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string"},"email":{"dataType":"string","required":true}}},
         };
-        app.get('/api/users',
+        app.post('/api/users',
             ...(fetchMiddlewares<RequestHandler>(UsersController)),
-            ...(fetchMiddlewares<RequestHandler>(UsersController.prototype.getTest)),
+            ...(fetchMiddlewares<RequestHandler>(UsersController.prototype.createUser)),
 
-            async function UsersController_getTest(request: ExRequest, response: ExResponse, next: any) {
+            async function UsersController_createUser(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsUsersController_getTest, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsUsersController_createUser, request, response });
 
                 const controller = new UsersController();
 
               await templateService.apiHandler({
-                methodName: 'getTest',
+                methodName: 'createUser',
                 controller,
                 response,
                 next,
                 validatedArgs,
-                successStatus: undefined,
+                successStatus: 201,
               });
             } catch (err) {
                 return next(err);
