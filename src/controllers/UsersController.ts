@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Route, SuccessResponse, Tags } from "tsoa";
 
 import prisma from "@config/database.js";
-import { Param } from "@prisma/client/runtime/client";
 
 @Route("users")     // base URL: /users
 @Tags("Users")      // grouping for Swagger
