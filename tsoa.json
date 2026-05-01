@@ -3,13 +3,11 @@
   "routes": {
     "routesDir": "src/routes",
     "middleware": "express",
-    "basePath": "/api",
     "noImplicitAdditionalProperties": "throw-on-extras"
   },
   "swagger": {
     "outputDirectory": "public",
     "entryPoint": "src/app.ts",
-    "basePath": "/api",
     "specVersion": 3,
     "securityDefinitions": {},
     "noImplicitAdditionalProperties": "throw-on-extras"
