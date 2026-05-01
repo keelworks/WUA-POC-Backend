@@ -2,14 +2,14 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    "rootDir": "./src",
+    "rootDir": "./",
     "outDir": "./dist",
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
-    "types": [],
+    "types": ["node"],
     "moduleResolution": "nodenext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -53,6 +53,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "prisma/**/*.ts", "*.ts"],
   "exclude": ["node_modules", "**/*.test.ts"]
 }
