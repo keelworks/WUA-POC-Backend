@@ -11,7 +11,7 @@ export class UsersController extends Controller {
         const result = await prisma.user.create({
             data: {
                 email: requestBody.email,
-                name: requestBody.name,
+                name: requestBody.name ?? null,
             },
         });
         this.setStatus(201);
