@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "gen-routes": "tsoa spec-and-routes"
+    "tsoa:gen": "tsoa spec-and-routes"
   },
   "keywords": [],
   "author": "",
