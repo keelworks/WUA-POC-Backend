@@ -2,16 +2,15 @@ import { Body, Controller, Delete, Get, Path, Post, Put, Route, SuccessResponse,
 
 import prisma from "@config/database.js";
 
-@Route("users")     // base URL: /users
-@Tags("Users")      // grouping for Swagger
-export class UsersController extends Controller {
+@Route("messages")     // base URL: /messages
+@Tags("Messages")      // grouping for Swagger
+export class MessagesController extends Controller {
     @Post()
     @SuccessResponse("201", "Created")
-    public async createUser(@Body() requestBody: { email: string; name?: string }): Promise<any> {
-        const result = await prisma.user.create({
+    public async createMessage(@Body() requestBody: { content: string; userId: number }): Promise<any> {
+        const result = await prisma.message.create({
             data: {
-                email: requestBody.email,
-                name: requestBody.name ?? null,
+
             },
         });
         this.setStatus(201);
@@ -20,16 +19,10 @@ export class UsersController extends Controller {
 
     @Get("{id}")
     @SuccessResponse("200", "OK")
-    public async getUser(@Path() id: number): Promise<any> {
+    public async getMessage(@Path() id: number): Promise<any> {
         const result = await prisma.user.findUnique({
             where: { id },
         });
-        return result;
-    }
-
-    @SuccessResponse("200", "OK")
-    public async getUsers(): Promise<any[]> {
-        const result = await prisma.user.findMany();
         return result;
     }
 
