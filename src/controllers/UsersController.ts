@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Route, SuccessResponse, Tags } from "tsoa";
+import { Body, Controller, Delete, Get, Path, Post, Put, Route, SuccessResponse, Tags } from "tsoa";
 
 import prisma from "@config/database.js";
 
@@ -18,18 +18,34 @@ export class UsersController extends Controller {
         return result;
     }
 
-    // TODO
-    public async getUser(): Promise<any> {
-
+    @Get("{id}")
+    @SuccessResponse("200", "OK")
+    public async getUser(@Path() id: number): Promise<any> {
+        const result = await prisma.user.findUnique({
+            where: { id },
+        });
+        return result;
     }
 
-    // TODO
-    public async updateUser(@Body() requestBody: { email: string; name?: string }): Promise<any> {
-
+    @Put("{id}")
+    @SuccessResponse("200", "OK")
+    public async updateUser(@Path() id: number, @Body() requestBody: { email: string; name?: string }): Promise<any> {
+        const result = await prisma.user.update({
+            where: { id },
+            data: {
+                email: requestBody.email,
+                name: requestBody.name ?? null,
+            },
+        });
+        return result;
     }
 
-    // TODO
-    public async deleteUser(): Promise<any> {
-
+    @Delete("{id}")
+    @SuccessResponse("204", "No Content")
+    public async deleteUser(@Path() id: number): Promise<void> {
+        await prisma.user.delete({
+            where: { id },
+        });
+        this.setStatus(204);
     }
 }

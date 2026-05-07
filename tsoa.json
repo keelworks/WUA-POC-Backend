@@ -3,6 +3,7 @@
   "routes": {
     "routesDir": "src/routes",
     "middleware": "express",
+    "esm": true,
     "noImplicitAdditionalProperties": "throw-on-extras"
   },
   "swagger": {
