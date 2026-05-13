@@ -17,3 +17,10 @@ model User {
   name  String?
   createdAt DateTime @default(now())
 }
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  subject   String
+  body      String
+  createdAt DateTime @default(now())
+}
