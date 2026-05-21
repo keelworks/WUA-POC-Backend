@@ -12,10 +12,27 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement()) 
-  email String  @unique
-  name  String?
-  createdAt DateTime @default(now())
+  id        Int           @id @default(autoincrement())
+  email     String        @unique
+  name      String?
+  createdAt DateTime      @default(now())
+  profiles  UserProfile[]
+}
+
+model UserProfile {
+  id                  Int      @id @default(autoincrement())
+  userId              Int
+  roleId              Int
+  pushNotificationToken String?
+  createdAt           DateTime @default(now())
+  user                User     @relation(fields: [userId], references: [id])
+  role                Role     @relation(fields: [roleId], references: [id])
+}
+
+model Role {
+  id       Int           @id @default(autoincrement())
+  title    String        // "Admin" or "Normal"
+  profiles UserProfile[]
 }
 
 model Message {
