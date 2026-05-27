@@ -162,27 +162,6 @@
 			}
 		},
 		"/profiles": {
-			"get": {
-				"operationId": "GetProfiles",
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"UserProfiles"
-				],
-				"security": [],
-				"parameters": []
-			},
 			"post": {
 				"operationId": "CreateProfile",
 				"responses": {
@@ -227,6 +206,27 @@
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetProfiles",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"UserProfiles"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/profiles/{id}": {
