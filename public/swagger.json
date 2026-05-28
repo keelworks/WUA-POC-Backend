@@ -648,6 +648,52 @@
 					}
 				]
 			}
+		},
+		"/messages/send": {
+			"post": {
+				"operationId": "SendMessage",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Messages"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"message": {
+										"type": "string"
+									},
+									"title": {
+										"type": "string"
+									},
+									"token": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"message",
+									"title",
+									"token"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"servers": [

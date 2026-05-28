@@ -1,10 +1,11 @@
 import { Body, Controller, Delete, Get, Path, Post, Put, Route, SuccessResponse, Tags } from "tsoa";
 import prisma from "@config/database.js";
 
+import { NotificationService } from "../services/NotificationService.js";
+
 @Route("messages")
 @Tags("Messages")
 export class MessagesController extends Controller {
-
     @Post()
     @SuccessResponse("201", "Created")
     public async createMessage(@Body() requestBody: { subject: string; body: string }): Promise<any> {
@@ -50,5 +51,13 @@ export class MessagesController extends Controller {
     public async deleteMessage(@Path() id: number): Promise<void> {
         await prisma.message.delete({ where: { id } });
         this.setStatus(204);
+    }
+
+    @Post("send")
+    @SuccessResponse("200", "OK")
+    public async sendMessage(@Body() requestBody: { token: string; title: string; message: string }): Promise<any> {
+        const service = new NotificationService();
+        const tickets = await service.sendNotification(requestBody.token, requestBody.title, requestBody.message);
+        return { success: true, tickets };
     }
 }
