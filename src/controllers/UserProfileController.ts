@@ -1,68 +1,56 @@
 import { Body, Controller, Delete, Get, Path, Post, Put, Route, SuccessResponse, Tags } from "tsoa";
-import prisma from "@config/database.js";
+import { UserProfileRepository } from "@repositories/UserProfileRepository.js";
+import CreateUserProfileDTO from "../models/DTO/UserProfile/CreateUserProfileDTO.js";
+import UserProfileDTO from "../models/DTO/UserProfile/UserProfileDTO.js";
 
 @Route("profiles")
 @Tags("UserProfiles")
 export class UserProfileController extends Controller {
+    private _userProfileRepository = new UserProfileRepository();
 
-    // Get all profiles, with their user and role info
+@Post()
+@SuccessResponse("201", "Created")
+public async createProfile(
+    @Body() requestBody: { userId: number; roleId: number; pushNotificationToken?: string }
+): Promise<any> {
+    const dto: CreateUserProfileDTO = {
+        userId: requestBody.userId,
+        roleId: requestBody.roleId,
+        pushNotificationToken: requestBody.pushNotificationToken,
+    } as CreateUserProfileDTO;
+    const result = await this._userProfileRepository.create(dto);
+    this.setStatus(201);
+    return result;
+}
+
     @Get()
     @SuccessResponse("200", "OK")
     public async getProfiles(): Promise<any[]> {
-        return await prisma.userProfile.findMany({
-            include: { user: true, role: true },
-        });
+        return await this._userProfileRepository.getList();
     }
 
-    // Get one profile by id
     @Get("{id}")
     @SuccessResponse("200", "OK")
     public async getProfile(@Path() id: number): Promise<any> {
-        return await prisma.userProfile.findUnique({
-            where: { id },
-            include: { user: true, role: true },
-        });
+        return await this._userProfileRepository.get(id);
     }
 
-    // Create a profile — links a user to a role
-    @Post()
-    @SuccessResponse("201", "Created")
-    public async createProfile(
-        @Body() requestBody: { userId: number; roleId: number; pushNotificationToken?: string }
-    ): Promise<any> {
-        const result = await prisma.userProfile.create({
-            data: {
-                userId: requestBody.userId,
-                roleId: requestBody.roleId,
-                pushNotificationToken: requestBody.pushNotificationToken ?? null,
-            },
-        });
-        this.setStatus(201);
-        return result;
-    }
-
-    // Update a profile — can update role or push token
     @Put("{id}")
     @SuccessResponse("200", "OK")
-    public async updateProfile(
-        @Path() id: number,
-        @Body() requestBody: { roleId?: number; pushNotificationToken?: string }
-    ): Promise<any> {
-        const data: { roleId?: number; pushNotificationToken?: string } = {};
-        if (requestBody.roleId !== undefined) data.roleId = requestBody.roleId;
-        if (requestBody.pushNotificationToken !== undefined) data.pushNotificationToken = requestBody.pushNotificationToken;
-
-        return await prisma.userProfile.update({
-            where: { id },
-            data,
-        });
+    public async updateProfile(@Path() id: number, @Body() requestBody: { roleId?: number; pushNotificationToken?: string }): Promise<any> {
+        const dto: UserProfileDTO = {
+            id: id,
+            userId: 0,
+            roleId: requestBody.roleId ?? 0,
+            pushNotificationToken: requestBody.pushNotificationToken,
+        } as UserProfileDTO;
+        return await this._userProfileRepository.update(dto);
     }
 
-    // Delete a profile
     @Delete("{id}")
     @SuccessResponse("204", "No Content")
     public async deleteProfile(@Path() id: number): Promise<void> {
-        await prisma.userProfile.delete({ where: { id } });
+        await this._userProfileRepository.delete(id);
         this.setStatus(204);
     }
 }

@@ -156,6 +156,36 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsUserProfileController_createProfile: Record<string, TsoaRoute.ParameterSchema> = {
+                requestBody: {"in":"body","name":"requestBody","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"pushNotificationToken":{"dataType":"string"},"roleId":{"dataType":"double","required":true},"userId":{"dataType":"double","required":true}}},
+        };
+        app.post('/profiles',
+            ...(fetchMiddlewares<RequestHandler>(UserProfileController)),
+            ...(fetchMiddlewares<RequestHandler>(UserProfileController.prototype.createProfile)),
+
+            async function UserProfileController_createProfile(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsUserProfileController_createProfile, request, response });
+
+                const controller = new UserProfileController();
+
+              await templateService.apiHandler({
+                methodName: 'createProfile',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsUserProfileController_getProfiles: Record<string, TsoaRoute.ParameterSchema> = {
         };
         app.get('/profiles',
@@ -209,36 +239,6 @@ export function RegisterRoutes(app: Router) {
                 next,
                 validatedArgs,
                 successStatus: 200,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsUserProfileController_createProfile: Record<string, TsoaRoute.ParameterSchema> = {
-                requestBody: {"in":"body","name":"requestBody","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"pushNotificationToken":{"dataType":"string"},"roleId":{"dataType":"double","required":true},"userId":{"dataType":"double","required":true}}},
-        };
-        app.post('/profiles',
-            ...(fetchMiddlewares<RequestHandler>(UserProfileController)),
-            ...(fetchMiddlewares<RequestHandler>(UserProfileController.prototype.createProfile)),
-
-            async function UserProfileController_createProfile(request: ExRequest, response: ExResponse, next: any) {
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsUserProfileController_createProfile, request, response });
-
-                const controller = new UserProfileController();
-
-              await templateService.apiHandler({
-                methodName: 'createProfile',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 201,
               });
             } catch (err) {
                 return next(err);
