@@ -17,7 +17,7 @@ export class NotificationService {
     }
 
     // TODO: Send a message to all users
-    async sendMessageToUsers(users: UserProfileDTO[], message: MessageDTO): Promise<ExpoPushTicket[]> {
+    async sendMessageToAllUsers(message: MessageDTO): Promise<ExpoPushTicket[]> {
         // This is a placeholder implementation. In a real application, you would retrieve the user's push token from the database and send a notification to it.
         console.log('Sending notification...');
         return [];
