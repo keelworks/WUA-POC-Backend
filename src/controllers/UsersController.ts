@@ -17,18 +17,32 @@ export class UsersController extends Controller {
     private _userRepository = new UserRepository();
 
     @Post()
-    @SuccessResponse("201", "Created")
-    public async createUser(@Body() requestBody: { email: string; name?: string }): Promise<any> {
-        const dto: CreateUserDTO = {
-            email: requestBody.email,
-            name: requestBody.name
-        } as CreateUserDTO;
-        
-        const result = await this._userRepository.create(dto);
-
-        this.setStatus(201);
-        return result;
+@SuccessResponse("201", "Created")
+public async createUser(
+    @Body() requestBody: { email: string; password: string; name?: string }
+): Promise<any> {
+    // Validate email format
+    if (!requestBody.email.includes("@")) {
+        this.setStatus(400);
+        return { error: "Invalid email format" };
     }
+
+    // Validate password length (minimum 6 chars)
+    if (requestBody.password.length < 6) {
+        this.setStatus(400);
+        return { error: "Password must be at least 6 characters" };
+    }
+
+    const dto: CreateUserDTO = {
+        email: requestBody.email,
+        password: requestBody.password,
+        name: requestBody.name,
+    } as CreateUserDTO;
+
+    const result = await this._userRepository.create(dto);
+    this.setStatus(201);
+    return result;
+}
 
     @Get("{id}")
     @SuccessResponse("200", "OK")
