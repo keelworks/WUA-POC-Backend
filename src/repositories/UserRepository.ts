@@ -18,6 +18,20 @@ export class UserRepository {
         });
         return result;
     }
+
+    public async getByEmailWithProfiles(email: string): Promise<User | null> {
+        const result = await prisma.user.findUnique({
+            where: { email },
+            include: { 
+                profiles: {
+                    select: {
+                        role: true
+                    }
+                }
+            },
+        });
+        return result;
+    }
     
     public async getList(): Promise<User[]> {
         const result = await prisma.user.findMany();

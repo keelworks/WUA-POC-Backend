@@ -1,8 +1,11 @@
 import jwt, { JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
 import type { StringValue } from "ms";
 
+import { User, UserProfile } from "@prisma/client";
+
 import AuthTokenDTO from "../models/DTO/Auth/AuthTokenDTO.js";
 import AuthUserDTO from "../models/DTO/Auth/AuthUserDTO.js";
+import { UserRepository } from "@repositories/UserRepository.js";
 
 type JwtPayload = AuthUserDTO & {
     iat?: number;
@@ -10,6 +13,42 @@ type JwtPayload = AuthUserDTO & {
 };
 
 export class AuthService {
+    private _userRepository = new UserRepository();
+
+    public async authenticate(username: string, password: string): Promise<AuthTokenDTO> {
+        const user = await this.findUserByUsernameAndPassword(username, password);
+
+        if (!user) {
+            throw new Error("Invalid username or password");
+        }
+
+        return this.signToken(user);
+    }
+
+    private async findUserByUsernameAndPassword(username: string, password: string): Promise<AuthUserDTO | null> {
+        const user = await this._userRepository.getByEmailWithProfiles(username);
+
+        if (!user || !this.ValidateUserPassword(user, password)) {
+            throw new Error("Invalid username or password");
+        }
+
+        const userProfile = user.profiles[0];
+
+        if (user && user.email === username) {
+            return {
+                userId: user.id,
+                profileId: userProfile.id,
+                role: userProfile.role,
+            };
+        }
+        return null;
+    }
+
+    public ValidateUserPassword(user: User, password: string): boolean {
+        // TODO: validate user password hash
+        return true;
+    }
+
     public signToken(user: AuthUserDTO): AuthTokenDTO {
         const expiresIn = this.getTokenExpiry();
         const payload: AuthUserDTO = {
