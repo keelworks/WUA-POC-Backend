@@ -26,7 +26,7 @@ model UserProfile {
   roleId              Int
   pushNotificationToken String?
   createdAt           DateTime @default(now())
-  user                User     @relation(fields: [userId], references: [id])
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   role                Role     @relation(fields: [roleId], references: [id])
 }
 
