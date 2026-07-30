@@ -32,7 +32,7 @@ export class AuthService {
     private async findUserByUsernameAndPassword(username: string, password: string): Promise<AuthUserDTO | null> {
         const user = await this._userRepository.getByEmailWithProfiles(username);
 
-        if (!user || !(await this.ValidateUserPassword(user, password))) {
+        if (!user || !(await this.validateUserPassword(user, password))) {
             throw new Error("Invalid username or password");
         }
 
@@ -49,7 +49,7 @@ export class AuthService {
         return null;
     }
 
-    public async ValidateUserPassword(user: User, password: string): Promise<boolean> {
+    public async validateUserPassword(user: User, password: string): Promise<boolean> {
         return this._passwordHashingService.verifyPassword(password, user.password!);
     }
 
