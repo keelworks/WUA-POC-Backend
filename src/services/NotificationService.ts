@@ -1,6 +1,7 @@
 import { Expo, ExpoPushTicket } from 'expo-server-sdk';
 
 import UserProfileDTO from '../models/DTO/UserProfile/UserProfileDTO.js';
+import MessageDTO from '../models/DTO/Message/MessageDTO.js';
 
 export class NotificationService {
     private expo: Expo;

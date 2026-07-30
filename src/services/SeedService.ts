@@ -1,6 +1,6 @@
 import { pathToFileURL } from "node:url";
 
-import prisma from "@config/database.js";
+import prisma from "../config/database.js";
 import { RoleTitle } from "../models/enums/RoleTitle.js";
 import type { PrismaClient, Role, User, UserProfile } from "@prisma/client";
 

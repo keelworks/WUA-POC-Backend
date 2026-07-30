@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Path, Post, Put, Route, SuccessResponse, Tags } from "tsoa";
-import { RoleRepository } from "@repositories/RoleRepository.js";
+import { RoleRepository } from "../repositories/RoleRepository.js";
 import { VALID_ROLE_TITLES, isValidRoleTitle } from "../models/enums/RoleTitle.js";
 import CreateRoleDTO from "../models/DTO/Role/CreateRoleDTO.js";
 import RoleDTO from "../models/DTO/Role/RoleDTO.js";

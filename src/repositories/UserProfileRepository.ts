@@ -1,4 +1,4 @@
-import prisma from "@config/database.js";
+import prisma from "../config/database.js";
 import { UserProfile } from "@prisma/client";
 import CreateUserProfileDTO from "../models/DTO/UserProfile/CreateUserProfileDTO.js";
 import UserProfileDTO from "../models/DTO/UserProfile/UserProfileDTO.js";

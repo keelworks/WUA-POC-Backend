@@ -5,7 +5,7 @@ import { User } from "@prisma/client";
 
 import AuthTokenDTO from "../models/DTO/Auth/AuthTokenDTO.js";
 import AuthUserDTO from "../models/DTO/Auth/AuthUserDTO.js";
-import { UserRepository } from "@repositories/UserRepository.js";
+import { UserRepository } from "../repositories/UserRepository.js";
 import { PasswordHashingService } from "./PasswordHashingService.js";
 
 const { JsonWebTokenError, TokenExpiredError } = jwt;

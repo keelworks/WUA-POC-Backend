@@ -1,4 +1,4 @@
-import prisma from "@config/database.js";
+import prisma from "../config/database.js";
 import { Message } from "@prisma/client";
 import MessageDTO from "../models/DTO/Message/MessageDTO.js";
 import CreateMessageDTO from "../models/DTO/Message/CreateMessageDTO.js";

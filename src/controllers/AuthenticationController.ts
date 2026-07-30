@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Route, SuccessResponse, Tags } from "tsoa";
 
-import { AuthService } from "@services/AuthService.js";
+import { AuthService } from "../services/AuthService.js";
 
 @Route("auth")
 @Tags("Authentication")

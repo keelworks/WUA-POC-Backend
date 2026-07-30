@@ -1,4 +1,4 @@
-import prisma from "@config/database.js";
+import prisma from "../config/database.js";
 import { User } from "@prisma/client";
 
 import CreateUserDTO from "../models/DTO/User/CreateUserDTO.js";

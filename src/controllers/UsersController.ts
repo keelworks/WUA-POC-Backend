@@ -1,4 +1,4 @@
-import { UserRepository } from "@repositories/UserRepository.js";
+import { UserRepository } from "../repositories/UserRepository.js";
 import { Body, Controller, Delete, Get, Path, Post, Put, Route, SuccessResponse, Tags } from "tsoa";
 
 // DTO = Data Transfer Object — a type that represents the data structure used 

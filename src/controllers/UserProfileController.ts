@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Path, Post, Put, Route, SuccessResponse, Tags } from "tsoa";
-import { UserProfileRepository } from "@repositories/UserProfileRepository.js";
+import { UserProfileRepository } from "../repositories/UserProfileRepository.js";
 import CreateUserProfileDTO from "../models/DTO/UserProfile/CreateUserProfileDTO.js";
 import UserProfileDTO from "../models/DTO/UserProfile/UserProfileDTO.js";
 

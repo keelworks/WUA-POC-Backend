@@ -1,4 +1,4 @@
-import prisma from "@config/database.js";
+import prisma from "../config/database.js";
 import { Role } from "@prisma/client";
 import CreateRoleDTO from "../models/DTO/Role/CreateRoleDTO.js";
 import RoleDTO from "../models/DTO/Role/RoleDTO.js";
