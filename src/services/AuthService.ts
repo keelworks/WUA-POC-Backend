@@ -1,4 +1,4 @@
-import jwt, { JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import type { StringValue } from "ms";
 
 import { User } from "@prisma/client";
@@ -7,6 +7,8 @@ import AuthTokenDTO from "../models/DTO/Auth/AuthTokenDTO.js";
 import AuthUserDTO from "../models/DTO/Auth/AuthUserDTO.js";
 import { UserRepository } from "@repositories/UserRepository.js";
 import { PasswordHashingService } from "./PasswordHashingService.js";
+
+const { JsonWebTokenError, TokenExpiredError } = jwt;
 
 type JwtPayload = AuthUserDTO & {
     iat?: number;
